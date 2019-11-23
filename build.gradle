@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 12
+targetCompatibility = 12
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.apache.pdfbox:pdfbox:2.0.17'
+}
+
+apply plugin: 'application'
+mainClassName = 'dev.webarata3.Application'
+applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
