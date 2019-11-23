@@ -17,6 +17,8 @@ public class MainFrame extends JFrame {
     private JButton rotate90Button;
     private JButton convertJpegButton;
     private JTextField jpegFileNamePrefixTextField;
+    private JButton separateButton;
+    private JTextField separatePrefixTextField;
 
     private File srcPdfFile;
 
@@ -42,17 +44,25 @@ public class MainFrame extends JFrame {
         });
         rotate90Button.setEnabled(false);
 
-        jpegFileNamePrefixTextField = new JTextField(20);
+        jpegFileNamePrefixTextField = new JTextField(3);
 
         convertJpegButton = new JButton("画像に変換");
         convertJpegButton.addActionListener(e -> {
             convertJpeg();
         });
 
+        separatePrefixTextField = new JTextField(3);
+        separateButton = new JButton("分割");
+        separateButton.addActionListener(e -> {
+            separetePdf();
+        });
+
         mainPanel.add(openFileButton);
         mainPanel.add(rotate90Button);
         mainPanel.add(jpegFileNamePrefixTextField);
         mainPanel.add(convertJpegButton);
+        mainPanel.add(separatePrefixTextField);
+        mainPanel.add(separateButton);
 
         var contentPane = getContentPane();
         contentPane.add(mainPanel, BorderLayout.CENTER);
@@ -99,6 +109,20 @@ public class MainFrame extends JFrame {
             String prefix = jpegFileNamePrefixTextField.getText();
             File outputFolder = fileChooser.getSelectedFile();
             EditPdf.convertJpeg(srcPdfFile, outputFolder, prefix);
+        } else if (selected == JFileChooser.CANCEL_OPTION) {
+        } else if (selected == JFileChooser.ERROR_OPTION) {
+        }
+    }
+
+    private void separetePdf() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int selected = fileChooser.showSaveDialog(this);
+        if (selected == JFileChooser.APPROVE_OPTION) {
+            String prefix = separatePrefixTextField.getText();
+            File outputFolder = fileChooser.getSelectedFile();
+            EditPdf.separate(srcPdfFile, outputFolder, prefix);
         } else if (selected == JFileChooser.CANCEL_OPTION) {
         } else if (selected == JFileChooser.ERROR_OPTION) {
         }

@@ -36,4 +36,18 @@ public class EditPdf {
             e.printStackTrace();
         }
     }
+
+    public static void separate(File inputFile, File outputFolder, String prefix) {
+        try (PDDocument doc = PDDocument.load(inputFile)) {
+            for (int i = 0; i < doc.getNumberOfPages(); i++) {
+                PDDocument newDoc = new PDDocument();
+                PDPage page = (PDPage) doc.getPage(i);
+                newDoc.addPage(page);
+                newDoc.save(new File(outputFolder, "prefix" + i + ".pdf"));
+                newDoc.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
