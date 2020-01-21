@@ -15,5 +15,5 @@ dependencies {
 }
 
 apply plugin: 'application'
-mainClassName = 'dev.webarata3.Application'
+mainClassName = 'dev.webarata3.pdf.Application'
 applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
