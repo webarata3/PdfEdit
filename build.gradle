@@ -1,3 +1,7 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
@@ -17,3 +21,11 @@ dependencies {
 apply plugin: 'application'
 mainClassName = 'dev.webarata3.pdf.Application'
 applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'dev.webarata3.pdf.Application'
+    }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
